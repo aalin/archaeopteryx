@@ -35,6 +35,10 @@ class FileMIDI
                                   note.number,
                                   note.velocity,
                                   midilib_delta)]
+    @track.merge [NoteOffEvent.new(note.channel,
+                                   note.number,
+                                   note.velocity,
+                                   midilib_delta + @sequence.length_to_delta(note.duration))]
   end
   def write
     File.open(@filename, 'wb') do |file|
